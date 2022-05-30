@@ -1,10 +1,10 @@
 import sys
 import db
-from models import User
+from adapters.models import User
 from flask import Flask, request, jsonify
-from movies import models
+from adapters import models
 from movies import register_login
-import validate_email
+import domain.model.validate_email as validate_email
 import pandas as pd
 
 app = Flask(__name__)
@@ -100,7 +100,7 @@ def getMoviesByRating(low_rating, high_rating, rating = "True"):
 @app.route("/getMoviesByYear/<int:year>", methods=["GET"])
 @app.route("/getMoviesByYear/<int:year>/<rating>", methods=["GET"])
 def getMoviesByYear(year, rating = "True"):
-    movies_result = pd.read_csv("movies/movie_results.csv")
+    movies_result = pd.read_csv("movie/movie_results.csv")
     movies_based_on_year = movies_result[movies_result["year"] == year]
     if movies_based_on_year.empty:
         return jsonify({"error" : "Movies not found within the year"}), 404
