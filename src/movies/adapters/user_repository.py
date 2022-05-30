@@ -1,6 +1,5 @@
 import abc
-from typing import Set
-from domain.model.User import * # es la clase User
+from .models import User
 
 class AbstractRepository(abc.ABC):
     def __init__(self) -> None:
@@ -52,6 +51,7 @@ class SqlAlchemyRepository(AbstractRepository):
 
     def _add(self, user):
         self.session.add(user)
+        self.session.commit()
 
     def _get(self, username, email):
         return self.session.query(User).filter_by(username=username, email = email).first()

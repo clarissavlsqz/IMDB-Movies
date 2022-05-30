@@ -1,11 +1,14 @@
 import sys
 import db
-from adapters.models import User
 from flask import Flask, request, jsonify
 from adapters import models
-from movies import register_login
-import domain.model.validate_email as validate_email
+from domain.commands import *
+from domain.Invoker import *
+from domain.model.Register import *
+from domain.model.Login import *
+from adapters import user_repository
 import pandas as pd
+from service.handlers import *
 
 app = Flask(__name__)
 models.start_mappers()
@@ -21,35 +24,34 @@ def hello_world():
 def register_user():
     user_username = request.json["username"]
     user_email = request.json["email"]
-    if validate_email.check(user_email):
-        if register_login.username_exists_in_db(user_username):
-           return jsonify({"error": "Username already exists"}), 400
-        if register_login.email_exists_in_db(user_email):
-            return jsonify({"error": "Email already used"}), 400
-        register_login.getGenres()
-        first_genre = request.json["first genre"]
-        second_genre = request.json["second genre"]
-        third_genre = request.json["third genre"]
-        p_key = register_login.calculate_preference(first_genre, second_genre, third_genre)
-        new_user = User(p_key, user_username, user_email)
-        db.session.add(new_user)
-        db.session.commit()
-
-        return jsonify({"message": "User created"}), 201
-
-    else:
-        return jsonify({"error": "Email is not valid"}), 400
-
+    first_genre = request.json["first genre"]
+    second_genre = request.json["second genre"]        
+    third_genre = request.json["third genre"]
+    new_user = Invoker()
+    register = Register()
+    repo = user_repository.SqlAlchemyRepository(db.session)
+    try:
+        new_user.set_action(RegisterCommand(register, user_username, user_email, first_genre, second_genre, third_genre, repo))
+        new_user.set_user()
+    except(UsedUsername, UsedEmail, InvalidEmail) as e:
+        return jsonify({"error" : str(e)}), 400
+    return jsonify({"meesage" : "User registered!"}), 201
+    
 @app.route("/login", methods=["POST"])
 def login_user():
     global preference_key
     user_username = request.json["username"]
     user_email = request.json["email"]
-    if register_login.verify_user_is_registered(user_username, user_email):
-        preference_key = register_login.getPreferenceKey(user_username, user_email)
-        return jsonify({"message":"Login successful"})
-    else:
-        return jsonify({"error":"Invalid username or password"})
+    registered_user = Invoker()
+    login = Login()
+    repo = user_repository.SqlAlchemyRepository(db.session)
+    try:
+        registered_user.set_action(LoginCommand(login, user_username, user_email, repo))
+        registered_user.set_user()
+    except(UserNotFound) as e:
+        return jsonify({"error" : str(e)}), 400
+    return jsonify({"message" : "Login succesful!"}), 200
+    
 
 @app.route("/getMovieRecs/<int:preference_key>", methods=["GET"])
 @app.route("/getMovieRecs/<int:preference_key>/<rating>", methods=["GET"])
