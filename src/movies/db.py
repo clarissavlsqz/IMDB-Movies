@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from movies.models import get_postgres_uri
+from adapters.models import get_postgres_uri
 
 DEFAULT_SESSION_FACTORY = sessionmaker(
     bind=create_engine(
