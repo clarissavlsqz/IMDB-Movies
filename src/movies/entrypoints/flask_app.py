@@ -9,12 +9,10 @@ from domain.model.Login import *
 from adapters import user_repository
 import pandas as pd
 from service.handlers import *
+from domain.model.Movies_Getter_Facade import *
 
 app = Flask(__name__)
 models.start_mappers()
-
-global preference_key 
-
 
 @app.route("/hello", methods=["GET"])
 def hello_world():
@@ -56,62 +54,34 @@ def login_user():
 @app.route("/getMovieRecs/<int:preference_key>", methods=["GET"])
 @app.route("/getMovieRecs/<int:preference_key>/<rating>", methods=["GET"])
 def getMovieRecs(preference_key, rating = "True"):
-    movies_result = pd.read_csv("movies/movie_results.csv")
-    movies_based_on_pref_key = movies_result[movies_result['preference_key'] == preference_key]
-    if rating == "False":
-        movies_based_on_pref_key = movies_based_on_pref_key.sort_values(by=["rating"]).head(10)
-    else:
-       movies_based_on_pref_key = movies_based_on_pref_key.sort_values(by=["rating"], ascending=False).head(10)
-
-    movies_based_on_pref_key = movies_based_on_pref_key[["movie_title", "rating", "year"]]
-    
-    return jsonify(movies_based_on_pref_key.to_dict(orient="records"))
+    facade = Movies_Getter_Facade()
+    movies_result = facade.get_movies("recommendation", rating, preference_key)
+    return jsonify(movies_result)
 
 @app.route("/getMoviesByStar/<name>", methods=["GET"])
 @app.route("/getMoviesByStar/<name>/<rating>", methods=["GET"])
 def getMoviesByStar(name, rating = "True"):
-    movies_result = pd.read_csv("movies/movie_results.csv")
-    movies_based_on_star = movies_result[movies_result["star_cast"].str.contains(name)]
-    if movies_based_on_star.empty:
+    facade = Movies_Getter_Facade()
+    movies_result = facade.get_movies("star cast", rating, None, name)
+    if len(movies_result) == 0:
         return jsonify({"error" : "Movies not found with cast member"}), 404
-    if rating == "False":
-        movies_based_on_star = movies_based_on_star.sort_values(by=["rating"])
-    else:
-       movies_based_on_star = movies_based_on_star.sort_values(by=["rating"], ascending=False)
-
-    movies_based_on_star = movies_based_on_star[["movie_title", "rating", "year"]]
-    
-    return jsonify(movies_based_on_star.to_dict(orient="records"))
+    return jsonify(movies_result)
 
 @app.route("/getMoviesByRating/<float:low_rating>/<float:high_rating>", methods=["GET"])
 @app.route("/getMoviesByRating/<float:low_rating>/<float:high_rating>/<rating>", methods=["GET"])
 def getMoviesByRating(low_rating, high_rating, rating = "True"):
-    movies_result = pd.read_csv("movies/movie_results.csv")
-    movies_based_on_rating = movies_result[(movies_result["rating"] >= low_rating) & (movies_result["rating"] <= high_rating)]
-    if movies_based_on_rating.empty:
+    facade = Movies_Getter_Facade()
+    movies_result = facade.get_movies("rating", rating, None, None, low_rating, high_rating)
+    if len(movies_result) == 0:
         return jsonify({"error" : "Movies not found within range of rating"}), 404
-    if rating == "False":
-        movies_based_on_rating = movies_based_on_rating.sort_values(by=["rating"])
-    else:
-       movies_based_on_rating = movies_based_on_rating.sort_values(by=["rating"], ascending=False)
-
-    movies_based_on_rating = movies_based_on_rating[["movie_title", "rating", "year"]]
-
-    return jsonify(movies_based_on_rating.to_dict(orient="records"))
+    return jsonify(movies_result)
 
 @app.route("/getMoviesByYear/<int:year>", methods=["GET"])
 @app.route("/getMoviesByYear/<int:year>/<rating>", methods=["GET"])
 def getMoviesByYear(year, rating = "True"):
-    movies_result = pd.read_csv("movie/movie_results.csv")
-    movies_based_on_year = movies_result[movies_result["year"] == year]
-    if movies_based_on_year.empty:
+    facade = Movies_Getter_Facade()
+    movies_result = facade.get_movies("year", rating, None, None, None, None, year)
+    if len(movies_result) == 0:
         return jsonify({"error" : "Movies not found within the year"}), 404
-    if rating == "False":
-        movies_based_on_year = movies_based_on_year.sort_values(by=["rating"])
-    else:
-       movies_based_on_year = movies_based_on_year.sort_values(by=["rating"], ascending=False)
-
-    movies_based_on_year = movies_based_on_year[["movie_title", "rating", "year"]]
-
-    return jsonify(movies_based_on_year.to_dict(orient="records"))
+    return jsonify(movies_result)
 
