@@ -1,7 +1,6 @@
 from adapters.user_repository import *
-import db
 from service.handlers import *
-from domain.model.Login import *
+from domain.use_cases.Login import *
 
 # Using the Design Patter Facade - It uses the AbstractRepository Class to handle the DB and get the preference key
 class Get_PKey_Facade:

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 import pandas as pd
-from .FilterRating import *
+from .utils.FilterRating import *
 
 # Open Close Principle - We can add other type of Movie Getters without modifying the existing ones
 # Interface Segregation Principle - The types of Movie Getters fully depend on the abstract class Movies_Getter, meaning that is specific to its purpose

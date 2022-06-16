@@ -1,6 +1,6 @@
 from adapters.user_repository import *
 from service.handlers import *
-from service.validate_email import *
+from utils.validate_email import *
 
 # Single Responsability Principle - This class is only used to login the user
 

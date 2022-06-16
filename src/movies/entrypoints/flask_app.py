@@ -1,13 +1,13 @@
 import sys
-import db
-from domain.model.GetPKeyFacade import *
-from domain.model.LoginFacade import *
-from domain.model.RegisterFacade import *
-from domain.model.VerifyUser import *
+import service.db as db
+from domain.use_cases.GetPKeyFacade import *
+from domain.use_cases.LoginFacade import *
+from domain.use_cases.RegisterFacade import *
+from utils.VerifyUser import *
 from flask import Flask, request, jsonify
 from adapters import models
 from service.handlers import *
-from domain.model.Movies_Getter_Facade import *
+from domain.use_cases.Movies_Getter_Facade import *
 
 app = Flask(__name__)
 models.start_mappers()

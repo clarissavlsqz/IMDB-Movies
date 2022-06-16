@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 import abc
-from .model.Login import *
-from .model.Register import *
+from .use_cases.Login import *
+from .use_cases.Register import *
 
 # Using the Command Design Pattern - It creates a Register and Login Command
 # Open Close Princple - New commands can be created

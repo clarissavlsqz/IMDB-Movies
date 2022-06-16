@@ -1,6 +1,6 @@
 import pandas as pd
-from domain.model.Simple_Factory import Simple_Factory
-from .FilterRating import *
+from domain.Simple_Factory import Simple_Factory
+from .utils.FilterRating import *
 
 # Using the Facade Design patter - It uses the Simple Factory Class and the Filter Rating class to get the final DataFrame result
 
