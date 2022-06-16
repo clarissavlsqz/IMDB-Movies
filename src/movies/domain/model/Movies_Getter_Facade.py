@@ -2,6 +2,8 @@ import pandas as pd
 from domain.model.Simple_Factory import Simple_Factory
 from .FilterRating import *
 
+# Using the Facade Design patter - It uses the Simple Factory Class and the Filter Rating class to get the final DataFrame result
+
 class Movies_Getter_Facade:
     def get_movies(self, type : str, rating : str, p_key : int = None, cast_name : str = None, low_r : float = None, high_r : float = None, year : int = None) -> pd.DataFrame:
         simple_factory = Simple_Factory()

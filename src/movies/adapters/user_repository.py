@@ -1,6 +1,8 @@
 import abc
 from .models import User
 
+# Repository Pattern
+
 class AbstractRepository(abc.ABC):
     def __init__(self) -> None:
         self.seen = set()

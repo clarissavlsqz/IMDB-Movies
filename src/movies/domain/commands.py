@@ -3,6 +3,9 @@ import abc
 from .model.Login import *
 from .model.Register import *
 
+# Using the Command Design Pattern - It creates a Register and Login Command
+# Open Close Princple - New commands can be created
+
 class Command(abc.ABC):
     @abc.abstractmethod
     def execute(self) -> None:

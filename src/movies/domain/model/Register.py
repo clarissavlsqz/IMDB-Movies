@@ -4,6 +4,8 @@ from service.handlers import *
 from service.validate_email import *
 from adapters.models import User
 
+# Single Responsability Principle - This class is only used to register the user
+
 class Register:
 
     def register(self, username : str, email : str, first_genre : int, second_genre : int, third_genre : int, repo : AbstractRepository) -> None: 

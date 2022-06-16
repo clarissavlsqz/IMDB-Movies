@@ -1,6 +1,8 @@
 import pandas as pd
 from domain.model.Movies_Getter import *
 
+# Using the simple Factory Design Pattern - We generate the DataFrame speicifc to the endpoint called
+
 class Simple_Factory:
     def movie_getter(self, type : str, p_key : int, cast_name : str, low_r : float, high_r : float, year : int) -> pd.DataFrame:
         if type == "recommendation":

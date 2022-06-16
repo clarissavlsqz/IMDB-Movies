@@ -2,6 +2,9 @@ from abc import ABC, abstractmethod
 import pandas as pd
 from .FilterRating import *
 
+# Open Close Principle - We can add other type of Movie Getters without modifying the existing ones
+# Interface Segregation Principle - The types of Movie Getters fully depend on the abstract class Movies_Getter, meaning that is specific to its purpose
+
 class Movies_Getter(ABC):
     @abstractmethod
     def get_movies():
@@ -10,7 +13,7 @@ class Movies_Getter(ABC):
 class Movies_Recommendation(Movies_Getter):
     def get_movies(self, preference_key : int) -> pd.DataFrame:
         movies_result = pd.read_csv("movies/movie_results.csv")
-        movies_based_on_pref_key = movies_result[movies_result['preference_key'] == preference_key].head(10)
+        movies_based_on_pref_key = movies_result[movies_result['preference_key'] == preference_key]
         return movies_based_on_pref_key
 
 class Movies_Cast(Movies_Getter):
