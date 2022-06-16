@@ -1,18 +1,16 @@
 # Proyecto Final - Diseño y Arquitectura de Software
 
-## Flix
-
-### Endpoints
+### Flix - Endpoints
 
 #### Login (/login)
 
 El usuario necesita ingresar su usuario y correo electrónico, si son válidos y existentes en la base de datos entonces el proceso se realizará con éxito. De lo contrario saldrá un mensaje de error.
 
-### Register (/register_user)
+#### Register (/register_user)
 
 El usuario necesita ingresar un usuario, correo electrónico y los tres números correspondientes a los génreos de su gusto. Si los campos ingresados son nuevos y válidos, entonces el proceso se realizará con éxito. De lo contrario saldrá un mensaje de error.
 
-### Get Movies Based on Preference Key (/getMoviesRecs) (/getMoviesRecs/False)
+#### Get Movies Based on Preference Key (/getMoviesRecs) (/getMoviesRecs/False)
 
 Como el proyecto no contiene un frontend, por el momento se requeríra que el usuario ingrese su correo electrónico para verifcar si está registrado. El resultado de este endpoint será una lista ordenada de las 10 películas con mayor rating o valoración, basadas en la llave de preferencia. Si se le agrega "False" a la ruta, entonces saldrán las 10 películas con menor rating o valoración, dependiedo de la llave de preferencia.
 
@@ -40,7 +38,7 @@ Ejemplo con una lista de 3 películas
 
     /getMoviesRecs/False
     preference_key = 3
-    [
+
     {
         "movie_title": "Jai Bhim",
         "rating": 8.01634138750673,
@@ -58,7 +56,7 @@ Ejemplo con una lista de 3 películas
     }
     ...
 
-### Get Movies Based on Star Cast (/getMoviesByStar/name) (/getMoviesByStar/name/False)
+#### Get Movies Based on Star Cast (/getMoviesByStar/name) (/getMoviesByStar/name/False)
 
 Como el proyecto no contiene un frontend, por el momento se requeríra que el usuario ingrese su correo electrónico para verifcar si está registrado. Al final de la ruta se tiene que agregar el nombre del artista que se quiere buscar. El resultado serán todas las películas en las que aparezca el artista. Si se agrega "False" al final de la ruta, entonces las películas saldrán en orden de menor a mayor rating.
 
@@ -85,12 +83,13 @@ Como el proyecto no contiene un frontend, por el momento se requeríra que el us
         "year": 2000
     }
 
-### Get Movies Based on Rating Range (/getMoviesByRating/low_rating/high_rating) (/getMoviesByRating/low_rating/high_rating/False)
+#### Get Movies Based on Rating Range (/getMoviesByRating/low_rating/high_rating) (/getMoviesByRating/low_rating/high_rating/False)
 
 Como el proyecto no contiene un frontend, por el momento se requeríra que el usuario ingrese su correo electrónico para verifcar si está registrado. En la ruta se tienen que agregar dos numeros flotantes, el primero para indicar el minimo rating y el segundo para indicar el máximo rating. El resultado serán todas las películas que esté dentro de ese rango. Si se agrega "False" al final de la ruta, entonces las películas saldrán en orden de menor a mayor rating.
 
-        /getMoviesByRating/8.5/9.0
-        {
+    /getMoviesByRating/8.5/9.0
+
+    {
         "movie_title": "Batman: El Caballero de la Noche",
         "rating": 8.993127135124897,
         "year": 2008
@@ -107,11 +106,12 @@ Como el proyecto no contiene un frontend, por el momento se requeríra que el us
     },
     ...
 
-### Get Movies Based on Year (/getMoviesByYear/year) (/getMoviesByYear/year/False)
+#### Get Movies Based on Year (/getMoviesByYear/year) (/getMoviesByYear/year/False)
 
 Como el proyecto no contiene un frontend, por el momento se requeríra que el usuario ingrese su correo electrónico para verifcar si está registrado. En la ruta se tiene que agregar el año a buscar. El resultado serán todas las películas que hayan salido en ese año. Si se agrega "False" al final de la ruta, entonces las películas saldrán en orden de menor a mayor rating.
 
-        /getMoviesByYear/2004/False
+    /getMoviesByYear/2004/False
+
     {
         "movie_title": "Antes del atardecer",
         "rating": 8.032732152632061,
