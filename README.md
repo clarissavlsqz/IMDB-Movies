@@ -137,19 +137,19 @@ Los siguientes diagramas de clases representan algunos de los patrones que se pu
 
 El patrón de comando se utilizó para las solicitudes de registro de usuario y el ingreso de sesión.
 
-![CommandPattern](https://www.dropbox.com/s/vpbcfzv5sj88wq8/CommandPattern.png?dl=0)
+![CommandPattern](https://www.dropbox.com/s/zenwddju5znssji/CommandPattern.jpg?dl=0&raw=1)
 
 ### Facade Pattern
 
 En este caso el patrón de Facade se utilizó para agrupar las dependencias que se necesitan para obtener películas.
 
-![FacadePattern](https://www.dropbox.com/s/djot206l0qo984m/FacadePattern.png?dl=0)
+![FacadePattern](https://www.dropbox.com/s/93ad1acco70do6b/FacadePattern.jpg?dl=0&raw=1)
 
 ### Simple Factory Pattern
 
 El patrón de fabrica simple se utilizó para conseguir el Data Frame con los datos requeridos dependiendo del endpoint a utilizar.
 
-![SimpleFactory](https://www.dropbox.com/s/zz823poci0he1z2/SimpleFactory.png?dl=0)
+![SimpleFactory](https://www.dropbox.com/s/7pshehx3gw5q11o/SimpleFactory.jpg?dl=0&raw=1)
 
 ## Running the project
 
