@@ -1,5 +1,5 @@
 import db
-from models import User
+from adapters.models import User
 
 def welcome_message(new_user : User) -> int:
     print("Bienvenido al servicio de Flix\nPara utilizar nuestro servicio debes de estar registrado con nosotros\nSeleccione el método con el que se identifique")

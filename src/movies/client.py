@@ -1,4 +1,4 @@
-import validate_email
+import domain.model.validate_email as validate_email
 
 class User:
     username : str

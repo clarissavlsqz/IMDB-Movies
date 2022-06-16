@@ -1,6 +1,6 @@
 import user
 import register_login
-import movies_info
+import others.movies_info as movies_info
 
 def main():
     new_user = user()
