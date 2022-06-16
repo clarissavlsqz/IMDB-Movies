@@ -38,7 +38,7 @@ Ejemplo con una lista de 3 películas
 
     /getMoviesRecs/False
     preference_key = 3
-    [
+
     {
         "movie_title": "Jai Bhim",
         "rating": 8.01634138750673,
@@ -87,8 +87,9 @@ Como el proyecto no contiene un frontend, por el momento se requeríra que el us
 
 Como el proyecto no contiene un frontend, por el momento se requeríra que el usuario ingrese su correo electrónico para verifcar si está registrado. En la ruta se tienen que agregar dos numeros flotantes, el primero para indicar el minimo rating y el segundo para indicar el máximo rating. El resultado serán todas las películas que esté dentro de ese rango. Si se agrega "False" al final de la ruta, entonces las películas saldrán en orden de menor a mayor rating.
 
-        /getMoviesByRating/8.5/9.0
-        {
+    /getMoviesByRating/8.5/9.0
+
+    {
         "movie_title": "Batman: El Caballero de la Noche",
         "rating": 8.993127135124897,
         "year": 2008
@@ -109,7 +110,8 @@ Como el proyecto no contiene un frontend, por el momento se requeríra que el us
 
 Como el proyecto no contiene un frontend, por el momento se requeríra que el usuario ingrese su correo electrónico para verifcar si está registrado. En la ruta se tiene que agregar el año a buscar. El resultado serán todas las películas que hayan salido en ese año. Si se agrega "False" al final de la ruta, entonces las películas saldrán en orden de menor a mayor rating.
 
-        /getMoviesByYear/2004/False
+    /getMoviesByYear/2004/False
+
     {
         "movie_title": "Antes del atardecer",
         "rating": 8.032732152632061,
