@@ -175,4 +175,4 @@ You can recreate the database with the following command:
 
 You can access the project using the following url:
 
-http://localhost:5005/hello
+http://localhost:5005/register_user
