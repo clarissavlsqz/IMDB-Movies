@@ -1,5 +1,5 @@
 import pandas as pd
-from domain.model.Movies_Getter import *
+from domain.use_cases.Movies_Getter import *
 
 # Using the simple Factory Design Pattern - We generate the DataFrame speicifc to the endpoint called
 

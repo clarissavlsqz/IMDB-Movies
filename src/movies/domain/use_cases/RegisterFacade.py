@@ -1,8 +1,8 @@
-import db
+import service.db as db
 from adapters import user_repository
 from domain.Invoker import Invoker
 from domain.commands import RegisterCommand
-from domain.model.Register import Register
+from domain.use_cases.Register import Register
 
 # Using the Facade Design Pattern - All the dependencies are used in the Facade instead of using them directly from the route
 

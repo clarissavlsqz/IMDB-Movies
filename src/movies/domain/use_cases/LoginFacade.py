@@ -1,8 +1,8 @@
-import db
+import service.db as db
 from adapters import user_repository
 from domain.Invoker import Invoker
 from domain.commands import LoginCommand
-from domain.model.Login import Login
+from domain.use_cases.Login import Login
 
 # Using the Facade Design Pattern - All the dependencies are used in the Facade instead of using them directly from the route
 

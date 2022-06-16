@@ -1,7 +1,7 @@
-from .KeyGenerator import KeyGenerator
+from utils.KeyGenerator import KeyGenerator
 from adapters.user_repository import *
 from service.handlers import *
-from service.validate_email import *
+from utils.validate_email import *
 from adapters.models import User
 
 # Single Responsability Principle - This class is only used to register the user
